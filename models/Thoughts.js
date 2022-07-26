@@ -1,5 +1,6 @@
 const {Schema,model}=require('mongoose');
 const moment=require('moment');
+const Reaction=require('./Reaction');
 
 //Defining the schema for the Thoughts document
 const thoughtsSchema=new Schema(
@@ -22,7 +23,7 @@ const thoughtsSchema=new Schema(
 
     },
     {
-        toJSOn:{
+        toJSON:{
             virtuals:true
         }
     }
@@ -40,7 +41,7 @@ thoughtsSchema.methods.getFormattedDate=function(){
 
 //Creating virtuals for the Thoughts model
 
-thoughtsSchema.virtuals('reactionCount').get(()=>{
+thoughtsSchema.virtual('reactionCount').get(()=>{
 
     return this.reactions.length;
 });

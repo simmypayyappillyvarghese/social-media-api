@@ -1,18 +1,38 @@
-const User=require('./models');
+const User=require('../models/User');
 
 module.exports={
 
-    getUsers:function(req,res){
-
+    getUsers(req,res){
         User.find()
-        .then(users=>res.json(users))
-        .catch(e=>res.status(500).json(e))
+       .select('-__v')
+        .then((users)=>
+        res.json(users))
+        .catch(e=>res.status(500).json(e));
     },
-    createUser:function(req,res){
+    createUser(req,res){
 
-        User.create()
+        User.create(req.body)
         .then(userData=>res.status(200).json(userData))
-        .then(err=>res.status(500).json(err))
+        .catch(err=>res.status(500).json(err));
+    },
+    getSingleUser(req,res){
+
+        User.findById({_id:`${req.params.userId}`})
+        .select('-__v')
+        .then(userData=>res.status(200).json(userData))
+        .catch(e=>res.status(500).json(e));
+    },
+    updateSingleUser(req,res){
+
+        User.updateOne(
+        {_id:`${req.params.userId}`},
+        {$set:req.body},
+        {runValidators:true,new: true}
+        )
+        .then(userData=>res.status(200).json(userData))
+        .catch(e=>res.status(500).json(e));
+
     }
 
 }
+

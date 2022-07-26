@@ -7,7 +7,9 @@ const reactionSchema=new Schema(
         //Why are we setting it as objectId
         reactionId:{
             type:Schema.Types.ObjectId,
-            default:new ObjectId()
+            default:function(){
+                return new Types.ObjectId();
+            }
         },
         reactionBody:{
             type:String,
@@ -21,11 +23,6 @@ const reactionSchema=new Schema(
         createdAt:{
             type:Date,
             default:Date.now
-        }
-    },
-    {
-        toJSON:{
-            virtuals:true
         }
     }
 );
