@@ -1,4 +1,4 @@
-const {Schema,model}=require('mongoose');
+const {Schema,Types}=require('mongoose');
 const moment=require('moment');
 
 
@@ -22,18 +22,21 @@ const reactionSchema=new Schema(
         },
         createdAt:{
             type:Date,
-            default:Date.now
+            default:Date.now,
+            get:getFormattedDate
         }
+    },
+    {
+    toJSON:{
+        getters: true
     }
+   }
 );
 
+//Getter Method to format the date
+function getFormattedDate(date){
 
-reactionSchema.methods.getFormattedDate=function(){
-
-    console.log(this.createdAt);
-    let formattedDate=moment((this.createdAt).toString(), "DD MM YYYY hh:mm:ss", true);
-    console.log(formattedDate);
-    return formattedDate;
+    return moment(date).format('MM-DD-YYYY HH:MM:SS');
 
 }
 

@@ -1,6 +1,6 @@
 const {Schema,model}=require('mongoose');
 const moment=require('moment');
-const Reaction=require('./Reaction');
+const reactionSchema=require('./Reaction');
 
 //Defining the schema for the Thoughts document
 const thoughtsSchema=new Schema(
@@ -13,35 +13,34 @@ const thoughtsSchema=new Schema(
         },
         createdAt:{
             type:Date,
-            default:Date.now
+            default:Date.now,
+            get:getFormattedDate
         },
         username:{
             type:String,
             required:true
         },
-        reactions:[Reaction]
+        reactions:[reactionSchema]
 
     },
     {
         toJSON:{
-            virtuals:true
+            virtuals:true,
+            getters: true,
         }
     }
 );
 
-//Defined methods on the schema to format the date
-thoughtsSchema.methods.getFormattedDate=function(){
+//Getter Method to format the date
+function getFormattedDate(date){
 
-    console.log(this.createdAt);
-    let formattedDate=moment((this.createdAt).toString(), "DD MM YYYY hh:mm:ss", true);
-    console.log(formattedDate);
-    return formattedDate;
+    return moment(date).format('MM-DD-YYYY HH:MM:SS');
 
 }
 
-//Creating virtuals for the Thoughts model
+// //Creating virtuals for the Thoughts model
 
-thoughtsSchema.virtual('reactionCount').get(()=>{
+thoughtsSchema.virtual('reactionCount').get(function(){
 
     return this.reactions.length;
 });
