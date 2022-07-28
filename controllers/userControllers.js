@@ -29,6 +29,7 @@ module.exports={
         {$set:req.body},
         {runValidators:true,new: true}
         )
+        .select('-__v')
         .then(userData=>res.status(200).json(userData))
         .catch(e=>res.status(500).json(e));
 
@@ -63,27 +64,6 @@ module.exports={
         }
             )
 
-//then ->Get the username from userdata,find all thought and remove
-
-//
-        /*
-        .then((userData=>{
-            Thoughts.deleteMany(
-                {
-                    _id: {$in:userData.thoughts},
-                   
-                }
-            )
-            .then(
-                removedDate=>res.status(200).json(removedData)
-            )
-            .catch(e=>res.status(400)json("No Thought found for user to Remove"))
-
-        })
-        .catch(e=>res.status(500).json(e))
-
-        
-        */
 
     },
     createFriend(req,res){
@@ -93,6 +73,7 @@ module.exports={
             {$addToSet:{friends:req.params.friendId}},
             {runValidators:true,new:true}
         )
+        .select('-__v')
         .then(userData=>res.status(200).json(userData))
         .catch(e=>res.status(500).json(e))
         

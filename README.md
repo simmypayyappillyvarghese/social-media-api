@@ -19,6 +19,9 @@ SO THAT my website can handle large amounts of unstructured data
 
 ### Acceptance Criteria
 
+<br>
+
+
 GIVEN a social network API
 *   WHEN I enter the command to invoke the application THEN my server is started and the Mongoose models are synced to the MongoDB database
 *   WHEN I open API GET routes in Insomnia for users and thoughts THEN the data for each of these routes is displayed in a formatted JSON
@@ -27,4 +30,30 @@ GIVEN a social network API
 
 
 
+### Links
+
+* Video Link :  https://drive.google.com/file/d/1TcsZ-eQyij8xM2l17FuBVDRPlmx53GF6/view 
+
+(Might Need to Download to view the video)
+
+
+* Github Repo Link : https://github.com/simmypayyappillyvarghese/social-media-api
+
+
+<br>
+
+### Technologies & Packages Used
+
+* [x] EXPRESS.JS
+* [x] NODE.JS
+* [x] MONGO DB
+* [x] MONGOOSE
+
+<br>
+
+### Screenshots
+
+Below is the screenshot of INSOMNIA screenshot of the routes creates
+
+![Screenshot of Insomnia](./assets/Screenshot_Social_Media_Route.png)
 

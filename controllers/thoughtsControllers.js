@@ -68,6 +68,7 @@ module.exports={
             {$addToSet:{reactions:req.body}},
             {runValidators:true,new:true}
         )
+        .select('-__v')
         .then(thoughtsData=>res.status(200).json(thoughtsData))
         .catch(e=>res.status(500).json(e))
         
